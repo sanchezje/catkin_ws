@@ -1,4 +1,12 @@
 #!/usr/bin/env python
+import math
+import copy
+import rospy
+from std_msgs.msg import Twist, PoseStamped, Pose, PoseWithCovariance
+from nav_msgs.msg import Odometry
+from geometry_msgs.msg import Quaternion
+import tf
+import tf.transformations import euler_from_quaternion
 
 
 
@@ -9,6 +17,9 @@ class Robot:
         Set up the node here
 
         """
+        px
+        py
+        theta
 
     def nav_to_pose(self, goal):
         # type: (PoseStamped) -> None
@@ -18,7 +29,7 @@ class Robot:
         :param goal: PoseStamped
         :return:
         """
- 
+
 
     def drive_straight(self, speed, distance):
         """
@@ -31,7 +42,7 @@ class Robot:
         """
 
 
-  
+
 
     def rotate(self, angle):
         """
@@ -39,6 +50,11 @@ class Robot:
         :param angle: angle to rotate
         :return:
         """
+        # check starting Odometry
+        # figure out which way to turn
+        # while odom < start_angle + theta
+        #   turn
+        #   send 
 
 
 
@@ -49,7 +65,13 @@ class Robot:
         :type msg: Odom
         :return:
         """
- 
+
+        px = data.pose.pose.position.x
+        py = data.pose.pose.position.y
+        quat = data.pose.pose.orientation
+        q = [quat.x, quat.y, quat.z, quat.w]
+        roll, pitch, yaw = euler_from_quaternion(q)
+
 
 
 
