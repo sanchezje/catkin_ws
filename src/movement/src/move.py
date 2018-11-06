@@ -24,7 +24,7 @@ class Robot:
         Set up the node here
 
         """
-        odom_sub = rospy.Subscriber('odometry', Odometry, odom_callback)
+        odom_sub = rospy.Subscriber('odom', Odometry, odom_callback)
         goal_sub = rospy.Subscriber('goal', PoseStamped, nav_to_pose)
         cmd_pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
         rospy.init_node('movememt', anonymous=True)
@@ -138,6 +138,7 @@ class Robot:
 
 
 if __name__ == '__main__':
+    r = Robot()
     try:
         rospy.spin() #exist always, only do things if
                      #recieve messages to do so via callbacks
